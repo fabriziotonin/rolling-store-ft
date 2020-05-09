@@ -37,9 +37,13 @@
 .App-link {
   color: var(--details);
 }
+/*==========================================*/
+/*=================Header=============*/
+/*==========================================*/
 .header{
   color: var(--text) !important;
 }
+
 .header-search {
 display: flex;
 justify-content: center;
@@ -53,8 +57,12 @@ margin-top: 15px;
 .header-logo{
   height: 60px;
   cursor: pointer !important;
-  
+
 }
+
+/*==========================================*/
+/*=================Content=============*/
+/*==========================================*/
 .content {
   background-color: var(--background);
   display: flex;
@@ -62,6 +70,17 @@ margin-top: 15px;
   justify-content: center;
   align-items: center;
 }
+
+.product-card{
+  background-color: var(--secondary);
+  margin: 10px;
+  padding: 10px;
+}
+
+/*==========================================*/
+/*=================Footer=============*/
+/*==========================================*/
+
 .footer {
   color: var(--text) !important;
   background-color: var(--details) !important;

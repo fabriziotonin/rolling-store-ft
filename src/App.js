@@ -8,16 +8,36 @@ constructor(props) {
   super(props)
 
   this.state = {
-     userName: 'Fabrizio'
+     userName: 'Fabrizio',
+     products: [
+       {
+         id: 'prod01',
+         name: 'nootebook',
+         brand: 'Asus',
+         price: 19000
+       },
+       {
+        id: 'prod02',
+        name: 'Televisor',
+        brand: 'Samsung',
+        price: 35400
+      },
+      {
+        id: 'prod03',
+        name: 'juego de ps4',
+        brand: 'Dark Souls',
+        price: 1900
+      },
+     ]
   }
 }
   render(){
-    const {userName} = this.state
+    const {userName, products} = this.state
 
     return (
       <main className="App">
         <header className="App-container">
-        <Main userName={userName}/>
+        <Main userName={userName} products={products}/>
         </header>
       </main>
     );
