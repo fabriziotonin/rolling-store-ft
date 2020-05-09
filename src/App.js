@@ -1,21 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import { Button } from 'antd' 
 import Main from './Components/Main';
 
-function App() {
-  
-  return (
-    <main>
-      <Main />
-      <p className="letras">
-        hola mundo
-      </p>
-        <Button type="primary" ghost>
-          Primary
-        </Button>
-    </main>
-  );
+class App extends Component {
+constructor(props) {
+  super(props)
+
+  this.state = {
+     userName: 'Fabrizio'
+  }
+}
+  render(){
+    const {userName} = this.state
+
+    return (
+      <main className="App">
+        <header className="App-container">
+        <Main userName={userName}/>
+        </header>
+      </main>
+    );
+  }
 }
 
 export default App;
