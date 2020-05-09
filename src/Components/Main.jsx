@@ -27,6 +27,11 @@ export default class Main extends Component {
     }
   }
 
+  handleChange = (e) =>{
+    let term = e.target.value;
+    this.props.updateTerm(term);
+  }
+
   render() {
     const { userName, products } = this.props
 
@@ -43,6 +48,7 @@ export default class Main extends Component {
                 <Search
                   placeholder="Que vas a Comprar hoy"
                   onSearch={this.setRedirect}
+                  onChange={this.handleChange}
                   enterButton
                 />
               </div>
