@@ -13,41 +13,62 @@ export default class Main extends Component {
       redirect: false
     }
   }
-  
 
-  setRedirect = () => { 
+
+  setRedirect = () => {
     this.setState({
       redirect: true
     });
   }
 
   renderRedirect = () => {
-    if(this.state.redirect){
+    if (this.state.redirect) {
       return <Redirect to="/results" />
     }
   }
 
-  handleChange = (e) =>{
+  handleChange = (e) => {
     let term = e.target.value;
     this.props.updateTerm(term);
   }
 
+  handleSearch = (term) => {
+    let currentProducts = [];
+    let newProducts = [];
+
+    if (term !== '') {
+      currentProducts = this.props.products;
+      newProducts = currentProducts.filter(item => {
+        const lc = item.name.toLowerCase();
+        const filter = term.toLowerCase();
+        console.log(lc.includes(filter))
+        return lc.includes(filter)
+      })
+      this.props.updateList(newProducts, term);
+    } else {
+      newProducts = this.props.products
+    }
+    this.setRedirect();
+    console.log(newProducts);
+    console.log(term, 'asdjaskdhs');
+  }
+
   render() {
-    const { userName, products } = this.props
+    const { userName, products, term } = this.props
 
     return (
       <Layout>
         <Header className="header">
           <Row>
-            <Col xs={{ span: 5 }} lg={{ span: 3 }}>
+            <Col xs={{ span: 7 }} lg={{ span: 3 }}>
               <img src={logo} className="header-logo" alt="logo" />
             </Col>
-            <Col xs={{ span: 19 }} lg={{ span: 16 }}>
+            <Col xs={{ span: 17 }} lg={{ span: 16 }}>
               <div className="header-search">
-                { this.renderRedirect() }
+                {this.renderRedirect()}
                 <Search
                   placeholder="Que vas a Comprar hoy"
-                  onSearch={this.setRedirect}
+                  onSearch={this.handleSearch}
                   onChange={this.handleChange}
                   enterButton
                 />

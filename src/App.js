@@ -24,6 +24,12 @@ class App extends Component {
           price: 19000
         },
         {
+          id: 'prod01',
+          name: 'nootebook',
+          brand: 'Asus',
+          price: 19000
+        },
+        {
           id: 'prod02',
           name: 'Televisor',
           brand: 'Samsung',
@@ -45,9 +51,20 @@ class App extends Component {
     this.setState({ term })
   }
 
+  updateList(newList, term) {
+    const { products } = this.state;
+    term !== '' ?
+      this.setState({
+        results: newList,
+        term
+      }) :
+      this.setState({ results: products })
+  }
+
   render() {
-    const { userName, products, term } = this.state
+    const { userName, products, term, results } = this.state
     const updateTerm = this.updateTerm.bind(this);
+    const updateList = this.updateList.bind(this);
 
     return (
       <Router>
@@ -56,7 +73,10 @@ class App extends Component {
             <div className="App-container">
               <Results
                 userName={userName}
+                results={results}
                 products={products}
+                updateTerm={updateTerm}
+                updateList={updateList}
               />
             </div>
           </Route>
@@ -67,6 +87,7 @@ class App extends Component {
                 products={products}
                 updateTerm={updateTerm}
                 term={term}
+                updateList={updateList}
               />
             </div>
           </Route>

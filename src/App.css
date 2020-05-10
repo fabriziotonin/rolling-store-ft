@@ -65,10 +65,11 @@ margin-top: 15px;
 /*==========================================*/
 .content {
   background-color: var(--background);
-  display: flex;
+  text-align: center;
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 }
 
 .product-card{

@@ -27,10 +27,34 @@ export default class Results extends Component {
     }
   }
 
+  handleChange = (e) => {
+    let term = e.target.value;
+    this.props.updateTerm(term);
+  }
+
+  handleSearch = (term) => {
+    let currentProducts = [];
+    let newProducts = [];
+
+    if (term !== '') {
+      currentProducts = this.props.products;
+      newProducts = currentProducts.filter(item => {
+        const lc = item.name.toLowerCase();
+        const filter = term.toLowerCase();
+        console.log(lc.includes(filter))
+        return lc.includes(filter)
+      })
+      this.props.updateList(newProducts, term);
+    } else {
+      newProducts = this.props.products
+      this.props.updateList(newProducts, term)
+    }
+  }
+
 
   render() {
-    const { userName, products } = this.props
-
+    const { userName, results } = this.props
+    console.log(results)
     return (
       <Layout>
         <Header className="header">
@@ -43,7 +67,8 @@ export default class Results extends Component {
               <div className="header-search">
                 <Search
                   placeholder="Que vas a Comprar hoy"
-                  onSearch={value => console.log(value)}
+                  onSearch={this.handleSearch}
+                  onChange={this.handleChange}
                   enterButton
                 />
               </div>
@@ -57,9 +82,9 @@ export default class Results extends Component {
         </Header>
         <Content className="content">
           <p> Resultados: </p>
-          <Row>
+          <Row  justify="center">
             {
-              products.map(prod => (
+              results.map(prod => (
                 <Col xs={{ span: 24 }} lg={{ span: 8 }}>
                   <ProductCard product={prod} />
                 </Col>
