@@ -41,13 +41,12 @@ export default class Results extends Component {
       newProducts = currentProducts.filter(item => {
         const lc = item.name.toLowerCase();
         const filter = term.toLowerCase();
-        console.log(lc.includes(filter))
         return lc.includes(filter)
       })
       this.props.updateList(newProducts, term);
     } else {
       newProducts = this.props.products
-      this.props.updateList(newProducts, term)
+      this.props.updateList(newProducts, term);
     }
   }
 

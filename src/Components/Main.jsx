@@ -41,7 +41,6 @@ export default class Main extends Component {
       newProducts = currentProducts.filter(item => {
         const lc = item.name.toLowerCase();
         const filter = term.toLowerCase();
-        console.log(lc.includes(filter))
         return lc.includes(filter)
       })
       this.props.updateList(newProducts, term);
@@ -49,8 +48,6 @@ export default class Main extends Component {
       newProducts = this.props.products
     }
     this.setRedirect();
-    console.log(newProducts);
-    console.log(term, 'asdjaskdhs');
   }
 
   render() {
@@ -86,7 +83,7 @@ export default class Main extends Component {
           <Row>
             {
               products.map(prod => (
-                <Col xs={{ span: 24 }} lg={{ span: 8 }}>
+                <Col key={prod.id} xs={{ span: 24 }} lg={{ span: 8 }}>
                   <ProductCard product={prod} />
                 </Col>
               ))

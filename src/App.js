@@ -24,10 +24,10 @@ class App extends Component {
           price: 19000
         },
         {
-          id: 'prod01',
+          id: 'prod04',
           name: 'nootebook',
-          brand: 'Asus',
-          price: 19000
+          brand: 'Lenovo',
+          price: 29000
         },
         {
           id: 'prod02',
