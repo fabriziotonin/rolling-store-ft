@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { firebaseApp } from "./firebase";
 import './App.css';
 import logo from "./logo.png";
 import { Layout, Input, Row, Col } from 'antd';
@@ -23,48 +24,32 @@ class App extends Component {
 
     this.state = {
       userName: 'Fabrizio',
-      products: [
-        {
-          id: 'prod01',
-          name: 'nootebook',
-          brand: 'Asus',
-          price: 25000
-        },
-        {
-          id: 'prod04',
-          name: 'nootebook',
-          brand: 'Lenovo',
-          price: 29000
-        },
-        {
-          id: 'prod02',
-          name: 'Televisor',
-          brand: 'Samsung',
-          price: 35400
-        },
-        {
-          id: 'prod03',
-          name: 'juego de ps4',
-          brand: 'Dark Souls',
-          price: 1450
-        },
-        {
-          id: 'prod05',
-          name: 'Heladeras',
-          brand: 'Heladera: whirlpool 16000W ',
-          price: 49000
-        },
-        {
-          id: 'prod06',
-          name: 'Auriculares',
-          brand: 'SteelSeries White Artic',
-          price: 19000
-        },
-      ],
+      products: [],
       results: [],
       term: '',
       redirect: false
     }
+    this.productsRef = firebaseApp.database().ref().child('products');
+    console.log(this.productsRef)
+  }
+
+  componentDidMount() {
+    this.listForProducts(this.productsRef)
+  }
+
+  listForProducts(productsRef) {
+    productsRef.on('value', snap => {
+      let products = [];
+      snap.forEach(child => {
+        products.push({
+          name: child.val().name,
+          brand: child.val().brand,
+          price: child.val().price,
+          id: child.val().id
+        });
+      });
+      this.setState({ products })
+    })
   }
 
   updateTerm(term) {
@@ -163,7 +148,7 @@ class App extends Component {
               />
             </div>
           </Route>
-          <Route path="/product">
+          <Route path="/product/:id">
             <Product />
           </Route>
           <Route path="/cart">

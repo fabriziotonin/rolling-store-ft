@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
 import { Layout, Row, Col } from 'antd';
+import { Link } from 'react-router-dom';
 import ProductCard from '../ProductCard/ProductCard';
 const { Content } = Layout;
 
 export default class Main extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-    
-    }
-  }
-
 
   render() {
-    const { userName, products, term } = this.props
+    const { products } = this.props
 
     return (
       <Layout>
@@ -23,7 +17,9 @@ export default class Main extends Component {
             {
               products.map(prod => (
                 <Col className="space-cards" key={prod.id} xs={{ span: 20 }} lg={{ span: 6 }}>
-                  <ProductCard product={prod} />
+                  <Link to={"/product/" + prod.id}>
+                    <ProductCard product={prod} />
+                  </Link>
                 </Col>
               ))
             }
